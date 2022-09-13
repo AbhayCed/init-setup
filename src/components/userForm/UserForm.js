@@ -9,6 +9,7 @@ const UserForm = () => {
     email: "",
   };
   const [addUser, setAddUser] = useState(initialstate);
+  const [query, setQuery] = useState("");
 
   const [userList, setUserList] = useState([]);
   const [filteredList, setFilteredList] = useState([]);
@@ -33,6 +34,7 @@ const UserForm = () => {
 
     if (addUser.username && addUser.age && addUser.email) {
       setUserList([...userList, addUser]);
+      setFilteredList([...userList, addUser]);
       setAddUser(initialstate);
     }
   };
@@ -42,9 +44,25 @@ const UserForm = () => {
     setFilteredList(filteredData);
   };
 
+  const handleSearch = (e) => {
+    const queryLower = e.target.value.toLowerCase();
+    console.log(queryLower);
+    const searchList = userList.filter(
+      (item) =>
+        item.username.toLowerCase().includes(queryLower) ||
+        item.email.toLowerCase().includes(queryLower)
+    );
+    if (e.target.value.length) {
+      setFilteredList(searchList);
+    } else {
+      setFilteredList(userList);
+    }
+    // console.log("SEARCH LIST", filteredList);
+  };
+
   return (
     <div>
-      <h1>Add New Users</h1>
+      <h1 className="todo-heading">Add New Users</h1>
 
       <div className="form-wrapper">
         <div>
@@ -93,11 +111,45 @@ const UserForm = () => {
         >
           Submit
         </button>
+        <div>
+          <input
+            className="search-users"
+            type="text"
+            value={query}
+            placeholder={"Search Users"}
+            onChange={(e) => {
+              setQuery(e.target.value);
+              handleSearch(e);
+            }}
+          />
+        </div>
       </div>
       {/* showing the list here */}
-      <div className="show-users-wrapper">
+      {/* <div className="show-users-wrapper">
         {userList &&
           userList.map((user, ind) => {
+            return (
+              <div key={ind}>
+                <UserList user={user} index={ind} deleteUser={deleteUser} />{" "}
+              </div>
+            );
+          })}
+      </div>
+      <br /> */}
+      {filteredList.length ? (
+        <div className="table-head-wrapper">
+          <p className="table-head"> Name </p>
+          <p className="table-head"> Email </p>
+          <p className="table-head"> Age </p>
+          <p className="table-head"> Action </p>
+        </div>
+      ) : (
+        <h3> Please Add some Users</h3>
+      )}
+
+      <div className="show-users-wrapper">
+        {filteredList &&
+          filteredList.map((user, ind) => {
             return (
               <div key={ind}>
                 <UserList user={user} index={ind} deleteUser={deleteUser} />{" "}

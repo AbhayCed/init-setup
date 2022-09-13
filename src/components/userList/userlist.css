@@ -1,0 +1,12 @@
+.userlist-wrapper {
+  display: flex;
+  width: 38%;
+  margin: 0 auto;
+  background-color: #f2f2f0;
+}
+
+.userlist-data {
+  font-size: 1.1em;
+
+  width: 100%;
+}

@@ -1,12 +1,21 @@
 import React, { useState } from "react";
+import { FaTimes } from "react-icons/fa";
+import "./userlist.css";
 
 const UserList = ({ user, index, deleteUser }) => {
   return (
-    <div>
-      <div>
-        <span> Name : {user.username}</span> <span> Age {user.age}</span>{" "}
-        <span onClick={(e) => deleteUser(index)}> X</span>
-      </div>
+    <div className="userlist-wrapper">
+      <p className="userlist-data"> {user.username}</p>
+      <p className="userlist-data"> {user.email}</p>
+      <p className="userlist-data"> {user.age}</p>
+      <p
+        className="userlist-data"
+        style={{ cursor: "pointer" }}
+        onClick={(e) => deleteUser(index)}
+      >
+        {" "}
+        <FaTimes size={"1em"} />
+      </p>
     </div>
   );
 };
