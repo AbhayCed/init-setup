@@ -3,6 +3,7 @@ import UserList from "../userList/UserList";
 import "./userForm.css";
 
 const UserForm = () => {
+  //states
   const initialstate = {
     username: "",
     age: "",
@@ -10,10 +11,9 @@ const UserForm = () => {
   };
   const [addUser, setAddUser] = useState(initialstate);
   const [query, setQuery] = useState("");
-
   const [userList, setUserList] = useState([]);
   const [filteredList, setFilteredList] = useState([]);
-
+  //handler functions
   const handleFormInput = (e) => {
     setAddUser({
       ...addUser,
@@ -136,26 +136,28 @@ const UserForm = () => {
           })}
       </div>
       <br /> */}
-      {filteredList.length ? (
-        <div className="table-head-wrapper">
-          <p className="table-head"> Name </p>
-          <p className="table-head"> Email </p>
-          <p className="table-head"> Age </p>
-          <p className="table-head"> Action </p>
-        </div>
-      ) : (
-        <h3> Please Add some Users</h3>
-      )}
+      <div className="user-table-wrapper">
+        {filteredList.length ? (
+          <div className="table-head-wrapper">
+            <p className="table-head"> Name </p>
+            <p className="table-head"> Email </p>
+            <p className="table-head"> Age </p>
+            <p className="table-head"> Action </p>
+          </div>
+        ) : (
+          <h3> Please Add some Users</h3>
+        )}
 
-      <div className="show-users-wrapper">
-        {filteredList &&
-          filteredList.map((user, ind) => {
-            return (
-              <div key={ind}>
-                <UserList user={user} index={ind} deleteUser={deleteUser} />{" "}
-              </div>
-            );
-          })}
+        <div className="show-users-wrapper">
+          {filteredList &&
+            filteredList.map((user, ind) => {
+              return (
+                <div key={ind}>
+                  <UserList user={user} index={ind} deleteUser={deleteUser} />{" "}
+                </div>
+              );
+            })}
+        </div>
       </div>
     </div>
   );

@@ -38,17 +38,22 @@
   border-radius: 5px;
   width: 28%;
 }
+.user-table-wrapper {
+  width: 38%;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  margin: 80px auto;
+  border-radius: 15px;
+}
 
 .table-head-wrapper {
   /* background-color: red; */
-  margin: 0 auto;
   display: flex;
   justify-content: space-between;
+  border-radius: 15px;
   /* padding: 1em 1em 0 1em; */
-  width: 38%;
 }
 .table-head {
-  margin: 1em 0 0 0;
+  margin: 0;
   padding: 1em 1.2em;
   width: 100%;
   background-color: #2f2fa2;
